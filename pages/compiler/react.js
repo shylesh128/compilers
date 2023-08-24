@@ -201,15 +201,6 @@ const CodePreview = () => {
     suggestionsContainerRef.current.style.display = "none";
   };
 
-  // useEffect(() => {
-  //   document.addEventListener("keydown", handleKeyDown);
-  //   codeTextAreaRef.current.addEventListener("input", handleCodeInput);
-
-  //   return () => {
-  //     document.removeEventListener("keydown", handleKeyDown);
-  //   };
-  // }, []);
-
   useEffect(() => {
     if (isSuggestionsOpen) {
       suggestionsContainerRef.current.innerHTML = "";
@@ -275,13 +266,7 @@ const CodePreview = () => {
           referrerPolicy="no-referrer"
         ></script>
       </Head>
-      <div
-        className="container"
-        style={{
-          display: "flex",
-          height: "100vh",
-        }}
-      >
+      <div id="container">
         <div id="code-editor">
           <textarea
             id="code"
