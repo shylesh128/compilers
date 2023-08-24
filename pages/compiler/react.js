@@ -201,14 +201,14 @@ const CodePreview = () => {
     suggestionsContainerRef.current.style.display = "none";
   };
 
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
-    codeTextAreaRef.current.addEventListener("input", handleCodeInput);
+  // useEffect(() => {
+  //   document.addEventListener("keydown", handleKeyDown);
+  //   codeTextAreaRef.current.addEventListener("input", handleCodeInput);
 
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener("keydown", handleKeyDown);
+  //   };
+  // }, []);
 
   useEffect(() => {
     if (isSuggestionsOpen) {
