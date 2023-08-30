@@ -10,10 +10,15 @@
   },
   "dependencies": {
     "@babel/standalone": "^7.22.10",
+    "@react-three/drei": "^9.80.9",
+    "chart.js": "^4.4.0",
     "js-beautify": "^1.14.9",
     "next": "13.4.12",
     "prettier": "^3.0.2",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-plotly.js": "^2.6.0",
+    "react-three-fiber": "^6.0.13",
+    "three": "^0.155.0"
   }
 }
