@@ -60,6 +60,12 @@ const HomePage = () => {
         <Link href="/compiler/canva">
           <p style={linkStyle}>Go to Canva Compiler</p>
         </Link>
+        <Link href="/math/2d">
+          <p style={linkStyle}>Go to 2d Math</p>
+        </Link>
+        <Link href="/math/3d">
+          <p style={linkStyle}>Go to 3d Math</p>
+        </Link>
       </div>
     </div>
   );

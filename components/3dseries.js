@@ -46,6 +46,7 @@ const EquationVisualizer3D = () => {
         }}
       >
         <Canvas camera={{ position: [5, 5, 5] }}>
+          <axesHelper />
           <ambientLight />
           <pointLight position={[10, 10, 10]} />
           <OrbitControls />

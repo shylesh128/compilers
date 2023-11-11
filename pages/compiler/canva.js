@@ -1,4 +1,5 @@
 import { canvaSnippets } from "@/code/codes";
+import { js_beautify } from "js-beautify";
 import React, { useEffect, useRef, useState } from "react";
 
 const CanvasPage = () => {
@@ -182,6 +183,42 @@ const CanvasPage = () => {
       ctx.stroke();
     }
 
+    function drawFibonacciSpiral(
+      ctx,
+      centerX,
+      centerY,
+      scaleFactor,
+      numberOfFibonacciNumbers,
+      color
+    ) {
+      const fibonacciSequence = generateFibonacci(numberOfFibonacciNumbers);
+
+      ctx.beginPath();
+      fibonacciSequence.forEach((num, index) => {
+        const angle = index * 0.2;
+        const radius = scaleFactor * Math.sqrt(index);
+        const x = centerX + radius * Math.cos(angle);
+        const y = centerY + radius * Math.sin(angle);
+
+        if (index === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+      });
+
+      ctx.strokeStyle = color;
+      ctx.stroke();
+    }
+
+    function generateFibonacci(n) {
+      const sequence = [0, 1];
+      for (let i = 2; i < n; i++) {
+        sequence.push(sequence[i - 1] + sequence[i - 2]);
+      }
+      return sequence;
+    }
+
     function drawSpiral(ctx, x, y, size) {
       ctx.beginPath();
       const numLoops = 10;
@@ -216,6 +253,38 @@ const CanvasPage = () => {
         ctx.quadraticCurveTo(innerX, innerY, outerX, outerY);
       }
       ctx.closePath();
+    }
+
+    function drawSpirals(ctx, numberOfSpirals) {
+      for (let i = 0; i < numberOfSpirals; i++) {
+        // Generate random values
+        const x = getRandomInt(50, 450);
+        const y = getRandomInt(50, 450);
+        const z = getRandomFloat(0.5, 4.0);
+        const size = getRandomInt(300, 1000);
+        const color = getRandomBlueShade();
+
+        drawFibonacciSpiral(ctx, x, y, z, size, color);
+      }
+    }
+
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    function getRandomFloat(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function getRandomBlueShade() {
+      const blueShades = [
+        "#6495ED",
+        "#4169E1",
+        "#0000CD",
+        "#000080",
+        "#1E90FF",
+      ];
+      return blueShades[Math.floor(Math.random() * blueShades.length)];
     }
 
     function drawSplash(ctx, x, y, size, color) {

@@ -1,4 +1,5 @@
 import { htmlSnippets, cssSnippets } from "@/code/codes";
+import { html_beautify } from "js-beautify";
 import React, { useState, useRef, useEffect } from "react";
 
 const IndexPage = () => {

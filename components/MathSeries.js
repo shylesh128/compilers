@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import Chart from "chart.js/auto"; // import chart.js
+import Chart from "chart.js/auto";
 
 const MathSeriesVisualizer = () => {
   const [formula, setFormula] = useState("");
   const [seriesData, setSeriesData] = useState([]);
   const [range, setRange] = useState(10);
+  const [showQuadrant1, setShowQuadrant1] = useState(true);
+  const [showQuadrant2, setShowQuadrant2] = useState(true);
+  const [showQuadrant3, setShowQuadrant3] = useState(true);
+  const [showQuadrant4, setShowQuadrant4] = useState(true);
   const chartContainerRef = useRef(null);
   const chartRef = useRef(null);
 
@@ -28,7 +32,18 @@ const MathSeriesVisualizer = () => {
         datasets: [
           {
             label: "Series Data",
-            data,
+            data: data.map((value, index) => {
+              // Check the quadrant of the data point and include it only if the corresponding quadrant is selected.
+              if (
+                (value >= 0 && value <= range && showQuadrant1) ||
+                (value < 0 && showQuadrant2) ||
+                (value > range && showQuadrant3) ||
+                (value < 0 && value > -range && showQuadrant4)
+              ) {
+                return value;
+              }
+              return null; // Exclude data points outside selected quadrants.
+            }),
             borderColor: "rgba(75, 192, 192, 1)",
             backgroundColor: "rgba(75, 192, 192, 0.2)",
             borderWidth: 1,
@@ -69,7 +84,7 @@ const MathSeriesVisualizer = () => {
         <label>Formula</label>
         <input
           type="text"
-          placeholder="Enter your mathematical formula but use single veriable n"
+          placeholder="Enter your mathematical formula but use single variable n"
           value={formula}
           onChange={(e) => setFormula(e.target.value)}
           style={{
@@ -90,6 +105,40 @@ const MathSeriesVisualizer = () => {
           }}
           max={10000}
         ></input>
+
+        <label>Show Quadrants</label>
+        <div>
+          <label>Show Quadrant 1</label>
+          <input
+            type="checkbox"
+            checked={showQuadrant1}
+            onChange={() => setShowQuadrant1(!showQuadrant1)}
+          />
+        </div>
+        <div>
+          <label>Show Quadrant 2</label>
+          <input
+            type="checkbox"
+            checked={showQuadrant2}
+            onChange={() => setShowQuadrant2(!showQuadrant2)}
+          />
+        </div>
+        <div>
+          <label>Show Quadrant 3</label>
+          <input
+            type="checkbox"
+            checked={showQuadrant3}
+            onChange={() => setShowQuadrant3(!showQuadrant3)}
+          />
+        </div>
+        <div>
+          <label>Show Quadrant 4</label>
+          <input
+            type="checkbox"
+            checked={showQuadrant4}
+            onChange={() => setShowQuadrant4(!showQuadrant4)}
+          />
+        </div>
 
         <button onClick={handleGenerateSeries}>Generate Series</button>
         <div className="series-data">{seriesData.join(", ")}</div>
